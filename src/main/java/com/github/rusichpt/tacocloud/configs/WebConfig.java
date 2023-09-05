@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import static com.github.rusichpt.tacocloud.models.Ingredient.*;
+import static com.github.rusichpt.tacocloud.models.Ingredient.Type;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
