@@ -1,0 +1,10 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    username: sa
+    password:
+    generate-unique-name: false
+    name: tacocloud
+
