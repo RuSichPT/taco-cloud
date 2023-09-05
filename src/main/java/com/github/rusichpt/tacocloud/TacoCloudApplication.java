@@ -11,9 +11,4 @@ public class TacoCloudApplication {
         SpringApplication.run(TacoCloudApplication.class, args);
     }
 
-    @Bean
-    String string(){
-        return new String("1");
-    }
-
 }

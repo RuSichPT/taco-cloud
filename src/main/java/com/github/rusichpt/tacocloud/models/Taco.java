@@ -3,14 +3,17 @@ package com.github.rusichpt.tacocloud.models;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
+@Table
 public class Taco {
 
+    @Id
     private Long id;
 
     private Date createdAt = new Date();
@@ -21,13 +24,5 @@ public class Taco {
 
     @NotNull
     @Size(min = 1, message = "You must choose at least 1 ingredient")
-    private List<Ingredient> ingredients;
-
-    public List<IngredientRef> getIngredientRefs() {
-        List<IngredientRef> list = new ArrayList<>();
-        for (Ingredient i : ingredients) {
-            list.add(new IngredientRef(i.getId()));
-        }
-        return list;
-    }
+    private List<IngredientRef> ingredients;
 }

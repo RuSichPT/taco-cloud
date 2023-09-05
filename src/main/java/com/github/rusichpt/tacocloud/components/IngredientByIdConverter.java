@@ -1,12 +1,15 @@
 package com.github.rusichpt.tacocloud.components;
 
 import com.github.rusichpt.tacocloud.models.Ingredient;
+import com.github.rusichpt.tacocloud.models.IngredientRef;
 import com.github.rusichpt.tacocloud.repositories.IngredientRepository;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
-public class IngredientByIdConverter implements Converter<String, Ingredient> {
+public class IngredientByIdConverter implements Converter<String, IngredientRef> {
 
     private final IngredientRepository repository;
 
@@ -15,8 +18,13 @@ public class IngredientByIdConverter implements Converter<String, Ingredient> {
     }
 
     @Override
-    public Ingredient convert(String id) {
-        return repository.findById(id).orElse(null);
+    public IngredientRef convert(String id) {
+        Optional<Ingredient> byId = repository.findById(id);
+        if (byId.isPresent()){
+            Ingredient ingredient = byId.get();
+            return new IngredientRef(ingredient.getId());
+        }
+        return null;
     }
 }
 
