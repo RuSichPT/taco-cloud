@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED,force = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 public class Ingredient {
     @Id
     private final String id;
