@@ -4,12 +4,13 @@
       lang="en">
 <head>
     <title>Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
 </head>
 <body>
 <h1>Login</h1>
 <img th:src="@{/images/TacoCloud.png}" alt="taco"/>
-<div th:if="${error}">
-    Unable to login. Check your username and password.
+<div th:if="${param.error}">
+    <span class="validationError">Unable to login. Check your username and password.</span>
 </div>
 <p>New here? Click
     <a th:href="@{/register}">here</a> to register.</p>
@@ -19,6 +20,9 @@
     <label for="password">Password: </label>
     <input type="password" name="pwd" id="password"/><br/>
     <input type="submit" value="Login"/>
+</form>
+<form action="/oauth2/authorization/github">
+    <input type="submit" value="Sign in with GitHub"/>
 </form>
 </body>
 </html>

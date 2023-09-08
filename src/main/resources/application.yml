@@ -2,6 +2,14 @@ server:
   port: 8081
 
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: github-client-id
+            clientSecret: github-client-secret
+
   datasource:
     username: sa
     password:
