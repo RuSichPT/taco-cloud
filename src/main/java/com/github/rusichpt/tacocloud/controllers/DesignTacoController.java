@@ -3,9 +3,11 @@ package com.github.rusichpt.tacocloud.controllers;
 import com.github.rusichpt.tacocloud.models.Ingredient;
 import com.github.rusichpt.tacocloud.models.Taco;
 import com.github.rusichpt.tacocloud.models.TacoOrder;
+import com.github.rusichpt.tacocloud.models.User;
 import com.github.rusichpt.tacocloud.repositories.IngredientRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -35,12 +37,14 @@ public class DesignTacoController {
 
     @PostMapping
     public String processTaco(@Valid Taco taco, Errors errors,
-                              @ModelAttribute TacoOrder tacoOrder) {
+                              @ModelAttribute TacoOrder tacoOrder,
+                              @AuthenticationPrincipal User user) {
         if (errors.hasErrors()) {
             log.info(errors.getFieldErrors().toString());
             return "design";
         }
         tacoOrder.addTaco(taco);
+        log.info(user.toString());
         log.info("Processing taco: {}", taco);
 
         return "redirect:/orders/current";
