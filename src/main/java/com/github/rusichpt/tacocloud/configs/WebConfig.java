@@ -37,6 +37,10 @@ public class WebConfig implements WebMvcConfigurer {
             repo.save(new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
             userRepository.save(new User("user", encoder.encode("1"), "Pavel",
                     "1", "vrn", "1", "1", "1"));
+            User admin = new User("admin", encoder.encode("2"), "Admin",
+                    "1", "vrn", "1", "1", "1");
+            admin.getRoles().add("ROLE_ADMIN");
+            userRepository.save(admin);
         };
     }
 }

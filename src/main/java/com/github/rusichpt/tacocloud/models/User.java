@@ -9,8 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Entity
@@ -30,10 +29,14 @@ public class User implements UserDetails {
     private final String state;
     private final String zip;
     private final String phoneNumber;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private final List<String> roles = new ArrayList<>(List.of("ROLE_USER"));
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return roles.stream().
+                map(SimpleGrantedAuthority::new)
+                .toList();
     }
 
     @Override
