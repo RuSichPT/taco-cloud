@@ -3,11 +3,13 @@ package com.github.rusichpt.tacocloud.repositories;
 import com.github.rusichpt.tacocloud.models.TacoOrder;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.Date;
 import java.util.List;
 
-public interface OrderRepository extends CrudRepository<TacoOrder, Long> {
+public interface OrderRepository extends CrudRepository<TacoOrder, Long>, PagingAndSortingRepository<TacoOrder, Long> {
+
     List<TacoOrder> findByDeliveryZip(String deliveryZip);
 
     List<TacoOrder> readOrdersByDeliveryZipAndPlacedAtBetween

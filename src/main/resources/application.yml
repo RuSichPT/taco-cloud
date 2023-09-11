@@ -16,3 +16,12 @@ spring:
     generate-unique-name: false
     name: tacocloud
 
+logging:
+  file:
+    name: logs/TacoCloud.log
+
+#My properties
+taco:
+  orders:
+    page-size: 10
+
