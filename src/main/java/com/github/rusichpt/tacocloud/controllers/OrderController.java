@@ -33,7 +33,7 @@ public class OrderController {
 
     @GetMapping
     public String ordersForUser(Model model) {
-        Pageable pageable = PageRequest.of(0, orderProps.getPageSize(), Sort.by("placedAt"));
+        Pageable pageable = PageRequest.of(0, orderProps.getPageSize(), Sort.by("placedAt").descending());
         model.addAttribute("orders", repository.findAll(pageable));
         log.info("Page size: {}", orderProps.getPageSize());
         return "orderList";
