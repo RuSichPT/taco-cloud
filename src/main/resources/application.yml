@@ -9,6 +9,9 @@ spring:
           github:
             clientId: github-client-id
             clientSecret: github-client-secret
+  data:
+    rest:
+      base-path: /data-api
 
   datasource:
     username: sa

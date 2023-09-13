@@ -6,6 +6,7 @@ import com.github.rusichpt.tacocloud.models.User;
 import com.github.rusichpt.tacocloud.repositories.IngredientRepository;
 import com.github.rusichpt.tacocloud.repositories.TacoRepository;
 import com.github.rusichpt.tacocloud.repositories.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ import java.util.Arrays;
 import static com.github.rusichpt.tacocloud.models.Ingredient.Type;
 
 @Configuration
+@Slf4j
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
@@ -77,8 +79,7 @@ public class WebConfig implements WebMvcConfigurer {
                     flourTortilla, cornTortilla, tomatoes,
                     lettuce, salsa));
             tacoRepo.save(taco3);
-
-
+            log.info("DataLoader loaded data");
         };
     }
 }
