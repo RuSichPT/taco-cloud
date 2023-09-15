@@ -9,6 +9,9 @@ spring:
           github:
             clientId: github-client-id
             clientSecret: github-client-secret
+      resource-server:
+        jwt:
+          jwk-set-uri: http://localhost:9000/oauth2/jwks
   data:
     rest:
       base-path: /data-api

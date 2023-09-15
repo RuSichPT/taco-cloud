@@ -4,6 +4,7 @@ import com.github.rusichpt.tacocloud.models.User;
 import com.github.rusichpt.tacocloud.repositories.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -38,13 +39,16 @@ public class SecurityConfig {
         MvcRequestMatcher.Builder mvc = new MvcRequestMatcher.Builder(introspector);// потому что 2 сервлета из за бд h2
         http
                 .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/ingredients")).hasAuthority("SCOPE_writeIngredients")
+                        .requestMatchers(mvc.pattern(HttpMethod.DELETE, "/api/ingredients")).hasAuthority("SCOPE_deleteIngredients")
                         .requestMatchers(mvc.pattern("/design"), mvc.pattern("/orders/*")).hasRole("USER")
                         .requestMatchers(mvc.pattern("/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .headers(headers -> headers
-                        .frameOptions(Customizer.withDefaults()).disable()) // чтобы работала h2-console
+                        .frameOptions(Customizer.withDefaults())
+                        .disable()) // чтобы работала h2-console
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/authenticate")
@@ -61,6 +65,8 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/", true)
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userAuthoritiesMapper(grantedAuthoritiesMapper())))
+                .oauth2ResourceServer(oauth2 -> oauth2
+                        .jwt(Customizer.withDefaults()))
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
                         .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/api/**")));
