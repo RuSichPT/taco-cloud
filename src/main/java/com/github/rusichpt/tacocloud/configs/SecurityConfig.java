@@ -39,7 +39,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(mvc.pattern("/design"), mvc.pattern("/orders/*")).hasRole("USER")
-                        .requestMatchers(mvc.pattern("/"), mvc.pattern("/**")).permitAll()
+                        .requestMatchers(mvc.pattern("/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                         .anyRequest().authenticated()
                 )
@@ -62,7 +62,8 @@ public class SecurityConfig {
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userAuthoritiesMapper(grantedAuthoritiesMapper())))
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")));
+                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
+                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/api/**")));
 
         return http.build();
     }

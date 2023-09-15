@@ -1,4 +1,4 @@
-package com.github.rusichpt.tacocloud.controllers;
+package com.github.rusichpt.tacocloud.controllers.rest;
 
 import com.github.rusichpt.tacocloud.models.TacoOrder;
 import com.github.rusichpt.tacocloud.repositories.OrderRepository;

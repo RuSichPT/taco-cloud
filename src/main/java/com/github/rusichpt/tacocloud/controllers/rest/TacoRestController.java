@@ -1,7 +1,6 @@
-package com.github.rusichpt.tacocloud.controllers;
+package com.github.rusichpt.tacocloud.controllers.rest;
 
 import com.github.rusichpt.tacocloud.models.Taco;
-import com.github.rusichpt.tacocloud.repositories.OrderRepository;
 import com.github.rusichpt.tacocloud.repositories.TacoRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
